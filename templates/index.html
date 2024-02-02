@@ -1,0 +1,96 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Script Runner</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+        .output-section {
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form action="/run_script" method="post">
+        <label for="user_input">Enter the dish:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Run Script</button>
+    </form>
+
+    {% if user_input %}
+    <div class="output-section">
+
+    </div>
+    {% endif %}
+
+    {% if error_message %}
+    <div class="output-section error-message">
+        <p>Error Message: {{ error_message }}</p>
+    </div>
+    {% endif %}
+
+    {% if output is defined %}
+    <div class="output-section">
+        <pre>There will be {{ output }}</pre>
+    </div>
+    {% endif %}
+</body>
+</html>
