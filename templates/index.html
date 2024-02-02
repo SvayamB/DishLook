@@ -1,7 +1,6 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +8,31 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #800000; /* Maroon color */
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Make the layout vertical */
             align-items: center;
             height: 100vh;
+            color: white; /* Text color for better contrast */
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1; /* Allow the main content to grow and take available space */
         }
 
         form {
-            background-color: #fff;
+            background-color: #fff; /* White background */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
             text-align: center;
+            color: #800000; /* Maroon text color */
         }
 
         label {
@@ -42,7 +50,7 @@
         }
 
         button {
-            background-color: #4caf50;
+            background-color: #800000; /* Maroon color */
             color: white;
             padding: 10px 15px;
             border: none;
@@ -51,46 +59,77 @@
         }
 
         button:hover {
-            background-color: #45a049;
-        }
-
-        pre {
-            white-space: pre-wrap;
+            background-color: #660000; /* Darker shade for hover */
         }
 
         .output-section {
             margin-top: 20px;
+            background-color: #fff; /* White background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: #800000; /* Maroon text color */
         }
 
         .error-message {
             color: #ff0000;
             font-weight: bold;
         }
+
+        /* Added styles for the attribution section */
+        .attribution {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px; /* Slightly bigger font size */
+            color: teal; /* Teal color */
+            position: relative; /* Create a positioning context for pseudo-element */
+        }
+
+        /* Added a decorative shape around the attribution text */
+        .attribution::before {
+            content: '';
+            position: absolute;
+            top: 50%; /* Align to the vertical center */
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: teal;
+        }
     </style>
 </head>
+
 <body>
-    <form action="/run_script" method="post">
-        <label for="user_input">Enter the dish:</label>
-        <input type="text" id="user_input" name="user_input" required>
-        <button type="submit">Run Script</button>
-    </form>
+    <main>
+        <form action="/run_script" method="post">
+            <label for="user_input">Enter the dish:</label>
+            <input type="text" id="user_input" name="user_input" required>
+            <button type="submit">Find Out</button> <!-- Changed button text to "Find Out" -->
+        </form>
 
-    {% if user_input %}
-    <div class="output-section">
+        {% if user_input %}
+        <div class="output-section">
 
+        </div>
+        {% endif %}
+
+        {% if error_message %}
+        <div class="output-section error-message">
+            <p>Error Message: {{ error_message }}</p>
+        </div>
+        {% endif %}
+
+        {% if output is defined %}
+        <div class="output-section">
+            <pre>There will be {{ output }}</pre>
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- Attribution section -->
+    <div class="attribution">
+        <p>Made by Svayam Badheka</p>
     </div>
-    {% endif %}
-
-    {% if error_message %}
-    <div class="output-section error-message">
-        <p>Error Message: {{ error_message }}</p>
-    </div>
-    {% endif %}
-
-    {% if output is defined %}
-    <div class="output-section">
-        <pre>There will be {{ output }}</pre>
-    </div>
-    {% endif %}
 </body>
+
 </html>

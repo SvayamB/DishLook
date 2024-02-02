@@ -39,7 +39,7 @@ def getFoodNuts(Foodname,days):
                     return (items['dish-name']+" At "+location_id_to_name(dinHall)+str(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
         date=date + datetime.timedelta(days = 1)
         count=count+1
-    return "not found"
+    return "not be any " + Foodname + " in the next 15 days"
 import sys
 
 def main():
