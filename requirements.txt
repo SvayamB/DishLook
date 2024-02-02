@@ -2,4 +2,3 @@ flask == 3.0.0
 beautifulsoup4
 requests
 pint
-gu
