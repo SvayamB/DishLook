@@ -20,7 +20,7 @@
 
         main {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Adjusted to vertical layout */
             align-items: center;
             flex-grow: 1; /* Allow the main content to grow and take available space */
         }
@@ -33,6 +33,7 @@
             width: 300px;
             text-align: center;
             color: #800000; /* Maroon text color */
+            margin-bottom: 20px; /* Added margin to separate from the output section */
         }
 
         label {
@@ -63,13 +64,13 @@
         }
 
         .output-section {
-            margin-top: 20px;
             background-color: #fff; /* White background */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
             color: #800000; /* Maroon text color */
+            margin-bottom: 20px; /* Added margin to separate from the form */
         }
 
         .error-message {
@@ -77,17 +78,12 @@
             font-weight: bold;
         }
 
-        /* Added styles for the attribution section */
+        /* Removed styles for the attribution section */
         .attribution {
-            margin-top: 20px;
             text-align: center;
             font-size: 16px; /* Slightly bigger font size */
             color: teal; /* Teal color */
-            position: relative; /* Create a positioning context for pseudo-element */
         }
-
-        /* Added a decorative shape around the attribution text */
-
     </style>
 </head>
 
