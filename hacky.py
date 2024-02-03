@@ -3,8 +3,8 @@ from umass_toolkit.dining import location_id_to_name
 from difflib import SequenceMatcher
 import datetime
 def isSubstring(s1, s2):
-    M = len(s1)
-    N = len(s2)
+    M = len(s1.lower())
+    N = len(s2.lower())
 
     # A loop to slide pat[] one by one
     for i in range(N - M + 1):
@@ -22,7 +22,7 @@ def isSubstring(s1, s2):
 
 
 def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
+    return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
 def getFoodNuts(Foodname,days,diningHalls):
     indexes=diningHalls#1 wussy,2 frank,3 hamp, 4 berk
