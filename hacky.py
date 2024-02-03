@@ -24,8 +24,8 @@ def isSubstring(s1, s2):
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-def getFoodNuts(Foodname,days):
-    indexes=[1,2,3,4]#1 wussy,2 frank,3 hamp, 4 berk
+def getFoodNuts(Foodname,days,diningHalls):
+    indexes=diningHalls#1 wussy,2 frank,3 hamp, 4 berk
     found=0
     count=0
     date = datetime.date.today()
@@ -48,8 +48,18 @@ def main():
         sys.exit(1)
 
     inp = sys.argv[1]
+    counties = sys.argv[2:]
+    diningHalls=[]
+    if 'worcester' in counties:
+        diningHalls.append(1)
+    if 'franklin' in counties:
+        diningHalls.append(2)
+    if 'hampshire' in counties:
+        diningHalls.append(3)
+    if 'berkshire' in counties:
+        diningHalls.append(4)
     # Your existing code that uses user_input goes here
-    print(getFoodNuts(inp, 15))
+    print(getFoodNuts(inp, 15, diningHalls))
 
 if __name__ == "__main__":
     main()

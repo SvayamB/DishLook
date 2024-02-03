@@ -90,10 +90,23 @@
 <body>
     <main>
         <form action="/run_script" method="post">
-            <label for="user_input">Enter the dish:</label>
-            <input type="text" id="user_input" name="user_input" required>
-            <button type="submit">Find Out</button> <!-- Changed button text to "Find Out" -->
-        </form>
+    <label for="user_input">Enter the dish:</label>
+    <input type="text" id="user_input" name="user_input" required>
+
+    <label for="worcester">Worcester:</label>
+    <input type="checkbox" id="worcester" name="diningHalls[]" value="worcester" checked style="margin-right: 5px;">
+
+    <label for="franklin">Franklin:</label>
+    <input type="checkbox" id="franklin" name="diningHalls[]" value="franklin" checked style="margin-right: 5px;">
+
+    <label for="hampshire">Hampshire:</label>
+    <input type="checkbox" id="hampshire" name="diningHalls[]" value="hampshire" checked style="margin-right: 5px;">
+
+    <label for="berkshire">Berkshire:</label>
+    <input type="checkbox" id="berkshire" name="diningHalls[]" value="berkshire" checked style="margin-right: 5px;">
+    <button type="submit">Find Out</button>
+</form>
+
 
         {% if user_input %}
         <div class="output-section">
