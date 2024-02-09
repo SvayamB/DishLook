@@ -4,7 +4,7 @@ import datetime
 import json
 import urllib.parse
 import requests
-
+import time
 from bs4 import BeautifulSoup
 import pint
 
@@ -100,7 +100,18 @@ def get_menu(location, date ):
         query_params = {'tid': location,
                         'date': date.strftime('%m/%d/%Y')}
         request_url = 'https://umassdining.com/foodpro-menu-ajax?' + urllib.parse.urlencode(query_params)
-        r = requests.get(request_url).json()
+        r = ''
+        while r == '':
+            try:
+                r = requests.get(request_url).json()
+                break
+            except:
+                print("Connection refused by the server..")
+                print("Let me sleep for 5 seconds")
+                print("ZZzzzz...")
+                time.sleep(5)
+                print("Was a nice sleep, now let me continue...")
+                continue
     except json.decoder.JSONDecodeError:
         return []
     ret = []
