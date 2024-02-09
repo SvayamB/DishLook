@@ -1,10 +1,9 @@
 # app.py
-from umass_toolkit.dining import get_menu
-from umass_toolkit.dining import location_id_to_name
+from dining import get_menu
+from dining import location_id_to_name
 from difflib import SequenceMatcher
 import datetime
 from flask import Flask, render_template, request
-import subprocess
 
 app = Flask(__name__)
 
@@ -43,8 +42,10 @@ def run_script():
                            dining_halls=dining_halls, output=output, error_message=error_message)
 
 def isSubstring(s1, s2):
-    M = len(s1.lower())
-    N = len(s2.lower())
+    s1=s1.lower()
+    s2=s2.lower()
+    M = len(s1)
+    N = len(s2)
 
     # A loop to slide pat[] one by one
     for i in range(N - M + 1):
@@ -85,5 +86,6 @@ def getFoodNuts(Foodname,days,diningHalls):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
