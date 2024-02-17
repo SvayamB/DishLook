@@ -74,10 +74,10 @@ def getFoodNuts(Foodname,days,diningHalls):
         for dinHall in indexes:
             menu=get_menu(dinHall,date)
             for items in menu:
-                if (similar(Foodname,items['dish-name'])==0.8 or items['dish-name'].__contains__(Foodname)):
+                if (similar(Foodname,items['dish-name'])>=0.8 or items['dish-name'].__contains__(Foodname)):
                     found=items
                 if found!=0:
-                    return (items['dish-name']+" At "+location_id_to_name(dinHall)+str(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
+                    return (items['dish-name']+" At "+location_id_to_name(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
         date=date + datetime.timedelta(days = 1)
         count=count+1
     return "not be any " + Foodname + " in the next 15 days"
