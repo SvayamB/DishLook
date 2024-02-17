@@ -1,6 +1,6 @@
-# Project Name
+# UMass DishLookup
 
-Welcome to Project Name! This is a brief guide to help you get started.
+Welcome to UMass DishLookup! This is a brief guide to help you get started.
 
 ## Getting Started
 
