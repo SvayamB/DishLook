@@ -27,3 +27,5 @@ To run the application, execute the following command:
 
 ```bash
 gunicorn app:app
+```
+
