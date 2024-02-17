@@ -4,7 +4,7 @@ Welcome to UMass DishLookup! This is a brief guide to help you get started.
 
 ## Getting Started
 
-1. **Clone the Repository**: First, navigate to the directory where you want to clone the repository.
+1. **Clone the Repository**: First, navigate to the directory (on your terminal) where you want to clone the repository (store this file).
     ```bash
     git clone https://github.com/SvayamB/DishLook.git
     ```
