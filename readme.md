@@ -20,10 +20,17 @@ After navigating to the project directory, install the necessary dependencies us
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## Usage
-
-To run the application, execute the following command:
+To run the application, execute the respective command:
+### Windows
+```bash
+waitress-serve app:app
+```
+### MacOS
 
 ```bash
 gunicorn app:app
+```
+Enjoy looking for your favorite dishes.
