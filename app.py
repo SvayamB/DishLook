@@ -1,8 +1,5 @@
 # app.py
-from dining import get_menu
-from dining import location_id_to_name
-from difflib import SequenceMatcher
-import datetime
+from dining import getDay
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -37,50 +34,11 @@ def run_script():
         dining_halls.append(3)
     if 'berkshire' in counties:
         dining_halls.append(4)
-    output=getFoodNuts(user_input, 15, dining_halls)
+    output=getDay(user_input, 15, dining_halls)
     return render_template('index.html', user_input=user_input, another_input=another_input,
                            dining_halls=dining_halls, output=output, error_message=error_message)
 
-def isSubstring(s1, s2):
-    s1=s1.lower()
-    s2=s2.lower()
-    M = len(s1)
-    N = len(s2)
 
-    # A loop to slide pat[] one by one
-    for i in range(N - M + 1):
-
-        # For current index i,
-        # check for pattern match
-        for j in range(M):
-            if (s2[i + j] != s1[j]):
-                break
-
-        if j + 1 == M:
-            return i
-
-    return -1
-
-
-def similar(a, b):
-    return SequenceMatcher(None, a.lower(), b.lower()).ratio()
-
-def getFoodNuts(Foodname,days,diningHalls):
-    indexes=diningHalls#1 wussy,2 frank,3 hamp, 4 berk
-    found=0
-    count=0
-    date = datetime.date.today()
-    while (found==0 and count<days):
-        for dinHall in indexes:
-            menu=get_menu(dinHall,date)
-            for items in menu:
-                if (similar(Foodname,items['dish-name'])>=0.8 or items['dish-name'].__contains__(Foodname)):
-                    found=items
-                if found!=0:
-                    return (items['dish-name']+" At "+location_id_to_name(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
-        date=date + datetime.timedelta(days = 1)
-        count=count+1
-    return "not be any " + Foodname + " in the next 15 days"
 
 
 

@@ -7,9 +7,36 @@ import requests
 import time
 from bs4 import BeautifulSoup
 import pint
+from difflib import SequenceMatcher
+import datetime
 
 
 ureg = pint.UnitRegistry()
+
+def isSubstring(s1, s2):
+    s1=s1.lower()
+    s2=s2.lower()
+    M = len(s1)
+    N = len(s2)
+
+    # A loop to slide pat[] one by one
+    for i in range(N - M + 1):
+
+        # For current index i,
+        # check for pattern match
+        for j in range(M):
+            if (s2[i + j] != s1[j]):
+                break
+
+        if j + 1 == M:
+            return i
+
+    return -1
+
+
+def similar(a, b):
+    return SequenceMatcher(None, a.lower(), b.lower()).ratio()
+
 
 
 #TODO: handle multiple levels of parentheses
@@ -142,3 +169,23 @@ def get_food_trucks():
             truck_data['is_open'] = False
         ret.append(truck_data)
     return ret
+
+def getDay(Foodname,days,diningHalls):
+    indexes=diningHalls#1 wussy,2 frank,3 hamp, 4 berk
+    found=0
+    count=0
+    date = datetime.date.today()
+    while (found==0 and count<days):
+        for dinHall in indexes:
+            menu=get_menu(dinHall,date)
+            for items in menu:
+                if (similar(Foodname,items['dish-name'])>=0.8 or items['dish-name'].__contains__(Foodname)):
+                    found=items
+                if found!=0:
+                    return (items['dish-name']+" At "+location_id_to_name(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
+        date=date + datetime.timedelta(days = 1)
+        count=count+1
+    return "There will not be any " + Foodname + " in the next 15 days"
+
+if __name__ == '__main__':
+    print(getDay("smth random",15,[1,2,3,4]))
