@@ -34,3 +34,5 @@ gunicorn app:app
 waitress-serve app:app
 ```
 
+## Credits
+Thanks to Simon Andrews for documentation of APIs done on [this repo](https://github.com/simon-andrews/umass-toolkit)
