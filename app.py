@@ -15,8 +15,10 @@ def index():
 def run_script():
     user_input = request.form.get('user_input', '')
     another_input = request.form.get('another_input', '')
-    counties = request.form.getlist('diningHalls[]')  # Updated to 'diningHalls'
-
+    counties = request.form.getlist('diningHalls[]')
+      # Updated to 'diningHalls'
+    days=int(request.form.get('days',''))
+    print(days)
     error_message = ""
     '''
     try:
@@ -37,7 +39,7 @@ def run_script():
         dining_halls.append(3)
     if 'berkshire' in counties:
         dining_halls.append(4)
-    output=getFoodNuts(user_input, 15, dining_halls)
+    output=getFoodNuts(user_input, days, dining_halls)
     return render_template('index.html', user_input=user_input, another_input=another_input,
                            dining_halls=dining_halls, output=output, error_message=error_message)
 
@@ -60,32 +62,26 @@ def isSubstring(s1, s2):
             return i
 
     return -1
-
-
 def similar(a, b):
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
-def getFoodNuts(Foodname,days,diningHalls):
-    indexes=diningHalls#1 wussy,2 frank,3 hamp, 4 berk
-    found=0
-    count=0
+def getFoodNuts(Foodname, days, diningHalls):
     date = datetime.date.today()
-    while (found==0 and count<days):
-        for dinHall in indexes:
-            menu=get_menu(dinHall,date)
-            for items in menu:
-                if (similar(Foodname,items['dish-name'])>=0.8 or items['dish-name'].__contains__(Foodname)):
-                    found=items
-                if found!=0:
-                    return (items['dish-name']+" At "+location_id_to_name(dinHall)+" on "+ date.strftime("%m/%d/%Y")+" during "+ found['meal-name'])
-        date=date + datetime.timedelta(days = 1)
-        count=count+1
-    return "not be any " + Foodname + " in the next 15 days"
-
-
+    
+    for _ in range(days):
+        for dinHall in diningHalls:
+            menu = get_menu(dinHall, date)
+            for item in menu:
+                similarity = similar(Foodname, item['dish-name'])
+                if similarity >= 0.8 or Foodname.lower() in item['dish-name'].lower():
+                    return f"{item['dish-name']} At {location_id_to_name(dinHall)} on {date.strftime('%m/%d/%Y')} during {item['meal-name']}"
+        date += datetime.timedelta(days=1)
+    
+    return f"no {Foodname} found in the next {days} days."
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 

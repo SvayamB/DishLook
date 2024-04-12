@@ -1,138 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Python Script Runner</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #100402; /* Maroon color */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column; /* Make the layout vertical */
-            align-items: center;
-            height: 100vh;
-            color: white; /* Text color for better contrast */
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #100402; /* Maroon color */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Make the layout vertical */
+        align-items: center;
+        height: 100vh;
+        color: white; /* Text color for better contrast */
+      }
 
-        main {
-            display: flex;
-            flex-direction: column; /* Adjusted to vertical layout */
-            align-items: center;
-            flex-grow: 1; /* Allow the main content to grow and take available space */
-        }
+      main {
+        display: flex;
+        flex-direction: column; /* Adjusted to vertical layout */
+        align-items: center;
+        flex-grow: 1; /* Allow the main content to grow and take available space */
+      }
 
-        form {
-            background-color: #A51524; /* White background */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-            color: #fcfcfc; /* Maroon text color */
-            margin-bottom: 20px; /* Added margin to separate from the output section */
-        }
+      form {
+        background-color: #a51524; /* White background */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        color: #fcfcfc; /* Maroon text color */
+        margin-bottom: 20px; /* Added margin to separate from the output section */
+      }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #afabab; /* New color for the text box */
-            color: #000000; /* Text color */
-        }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #afabab; /* New color for the text box */
+        color: #000000; /* Text color */
+      }
 
-        button {
-            background-color: #800000; /* Maroon color */
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+      button {
+        background-color: #800000; /* Maroon color */
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-        button:hover {
-            background-color: #660000; /* Darker shade for hover */
-        }
+      button:hover {
+        background-color: #660000; /* Darker shade for hover */
+      }
 
-        .output-section {
-            background-color: #9f9d9d; /* White background */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            color: #000000; /* Maroon text color */
-            margin-bottom: 20px; /* Added margin to separate from the form */
-        }
+      .output-section {
+        background-color: #9f9d9d; /* White background */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        color: #000000; /* Maroon text color */
+        margin-bottom: 20px; /* Added margin to separate from the form */
+      }
 
-        .error-message {
-            color: #ff0000;
-            font-weight: bold;
-        }
+      .error-message {
+        color: #ff0000;
+        font-weight: bold;
+      }
 
-        /* Removed styles for the attribution section */
-        .attribution {
-            text-align: center;
-            font-size: 16px; /* Slightly bigger font size */
-            color: teal; /* Teal color */
-        }
+      /* Removed styles for the attribution section */
+      .attribution {
+        text-align: center;
+        font-size: 16px; /* Slightly bigger font size */
+        color: teal; /* Teal color */
+      }
+      .ticker-input {
+        width: 60px;
+        text-align: center;
+        font-size: 18px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <form action="/run_script" method="post">
-    <label for="user_input">Enter the dish:</label>
-    <input type="text" id="user_input" name="user_input" required>
+      <form action="/run_script" method="post">
+        <label for="user_input">Enter the dish:</label>
+        <input type="text" id="user_input" name="user_input" required />
 
-    <label for="worcester">Worcester:</label>
-    <input type="checkbox" id="worcester" name="diningHalls[]" value="worcester" checked style="margin-right: 5px;">
+        <label for="worcester">Worcester:</label>
+        <input
+          type="checkbox"
+          id="worcester"
+          name="diningHalls[]"
+          value="worcester"
+          checked
+          style="margin-right: 5px"
+        />
 
-    <label for="franklin">Franklin:</label>
-    <input type="checkbox" id="franklin" name="diningHalls[]" value="franklin" checked style="margin-right: 5px;">
+        <label for="franklin">Franklin:</label>
+        <input
+          type="checkbox"
+          id="franklin"
+          name="diningHalls[]"
+          value="franklin"
+          checked
+          style="margin-right: 5px"
+        />
 
-    <label for="hampshire">Hampshire:</label>
-    <input type="checkbox" id="hampshire" name="diningHalls[]" value="hampshire" checked style="margin-right: 5px;">
+        <label for="hampshire">Hampshire:</label>
+        <input
+          type="checkbox"
+          id="hampshire"
+          name="diningHalls[]"
+          value="hampshire"
+          checked
+          style="margin-right: 5px"
+        />
 
-    <label for="berkshire">Berkshire:</label>
-    <input type="checkbox" id="berkshire" name="diningHalls[]" value="berkshire" checked style="margin-right: 5px;">
-    <button type="submit">Find Out</button>
-</form>
-
-
-        {% if user_input %}
-        <div class="output-section">
-
+        <label for="berkshire">Berkshire:</label>
+        <input
+          type="checkbox"
+          id="berkshire"
+          name="diningHalls[]"
+          value="berkshire"
+          checked
+          style="margin-right: 5px"
+        />
+        <label for="days">
+          How far in ahead would you like to search for this dish? (days)</label
+        >
+        <div>
+          <input
+            type="number"
+            class="ticker-input"
+            id="days"
+            name="days"
+            value="1"
+            min="1"
+            max="15"
+            onblur="validateQuantity()"
+          />
         </div>
-        {% endif %}
+        <button type="submit">Find Out</button>
+      </form>
 
-        {% if error_message %}
-        <div class="output-section error-message">
-            <p>Error Message: {{ error_message }}</p>
-        </div>
-        {% endif %}
-
-        {% if output is defined %}
-        <div class="output-section">
-            <pre>There will be {{ output }}</pre>
-        </div>
-        {% endif %}
+      {% if user_input %}
+      <div class="output-section"></div>
+      {% endif %} {% if error_message %}
+      <div class="output-section error-message">
+        <p>Error Message: {{ error_message }}</p>
+      </div>
+      {% endif %} {% if output is defined %}
+      <div class="output-section">
+        <pre>There will be {{ output }}</pre>
+      </div>
+      {% endif %}
     </main>
+    <script>
+      function increment() {
+        var value = parseInt(document.getElementById("quantity").value, 10);
+        if (value < 15) {
+          document.getElementById("quantity").value = value + 1;
+        }
+      }
+
+      function decrement() {
+        var value = parseInt(document.getElementById("quantity").value, 10);
+        if (value > 1) {
+          document.getElementById("quantity").value = value - 1;
+        }
+      }
+
+      function validateQuantity() {
+        var value = parseInt(document.getElementById("quantity").value, 10);
+        if (isNaN(value) || value < 1) {
+          document.getElementById("quantity").value = 1;
+        } else if (value > 15) {
+          document.getElementById("quantity").value = 15;
+        }
+      }
+    </script>
 
     <!-- Attribution section -->
     <div class="attribution">
-        <p>Made by Svayam Badheka</p>
+      <p>Made by Svayam Badheka</p>
     </div>
-</body>
-
+  </body>
 </html>
