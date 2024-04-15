@@ -3,6 +3,7 @@ from dining import get_menu
 from dining import location_id_to_name
 from difflib import SequenceMatcher
 import datetime
+import pytz
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -66,14 +67,15 @@ def similar(a, b):
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
 def getFoodNuts(Foodname, days, diningHalls):
-    date = datetime.date.today()
-    
+    ny_timezone = pytz.timezone('America/New_York')
+    ny_time = datetime.datetime.now(ny_timezone)
+    date = ny_time.date()  
     for _ in range(days):
         for dinHall in diningHalls:
             menu = get_menu(dinHall, date)
             for item in menu:
                 similarity = similar(Foodname, item['dish-name'])
-                if similarity >= 0.8 or Foodname.lower() in item['dish-name'].lower():
+                if similarity >= 0.7 or Foodname.lower() in item['dish-name'].lower():
                     return f"{item['dish-name']} At {location_id_to_name(dinHall)} on {date.strftime('%m/%d/%Y')} during {item['meal-name']}"
         date += datetime.timedelta(days=1)
     
