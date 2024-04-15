@@ -75,7 +75,7 @@ def getFoodNuts(Foodname, days, diningHalls):
             menu = get_menu(dinHall, date)
             for item in menu:
                 similarity = similar(Foodname, item['dish-name'])
-                if similarity >= 0.7 or Foodname.lower() in item['dish-name'].lower():
+                if similarity >= 0.7 or isSubstring(Foodname, item['dish-name']) != -1:
                     return f"{item['dish-name']} At {location_id_to_name(dinHall)} on {date.strftime('%m/%d/%Y')} during {item['meal-name']}"
         date += datetime.timedelta(days=1)
     
