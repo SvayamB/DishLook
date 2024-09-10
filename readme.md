@@ -9,9 +9,10 @@ Welcome to UMass DishLookup! This is a brief guide to help you get started.
     git clone https://github.com/SvayamB/DishLook.git
     ```
 
-2. **Navigate to the Project Directory**: Move into the project directory.
+2. **Navigate to the Project Directory and go into the src folder**: Move into the project directory.
     ```bash
     cd DishLook
+    cd src
     ```
 
 ## Installation

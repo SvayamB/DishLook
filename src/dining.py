@@ -14,6 +14,26 @@ ureg = pint.UnitRegistry()
 
 #TODO: handle multiple levels of parentheses
 #e.g. Chili (spicy (but not too spicy))
+
+def get_locations():
+    locations = requests.get('https://www.umassdining.com/uapp/get_infov2').json()
+    ret = []
+    for location in locations:
+        if location['opening_hours'] == 'Closed' or location['closing_hours'] == 'Closed':
+            opening_hours = None
+            closing_hours = None
+        else:
+            # TODO: this is horrific replace it
+            opening_hours = datetime.datetime(2000, 1, 1).strptime(location['opening_hours'], '%I:%M %p').time()
+            closing_hours = datetime.datetime(2000, 1, 1).strptime(location['closing_hours'], '%I:%M %p').time()
+        ret.append({
+            'name': location['location_title'],
+            'id': location['location_id'],
+            'opening_hours': opening_hours,
+            'closing_hours': closing_hours,
+        })
+    return ret
+
 def parse_list(ingredients):
     if ingredients == '':
         return []
